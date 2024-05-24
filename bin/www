@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+const app = require("../app");
+const http = require("http");
+
+const server = http.createServer(app);
+
+const ENV = process.env.NODE_ENV;
+const PORT = process.env.PORT || 3000;
+
+const onListening = () => {
+  console.log(`✅ Server Listening on port http://localhost:${PORT} 👾`);
+};
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+const onError = (err) => {
+  if (err.syscall !== "listen") {
+    throw err;
+  }
+
+  var bind = typeof PORT === "string" ? "Pipe " + PORT : "Port " + PORT;
+
+  // handle specific listen errors with friendly messages
+  switch (err.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw err;
+  }
+};
+
+/**
+ * dev 환경에서의 서버 실행
+ */
+const setDevelopEnv = () => {
+  app.listen(PORT, onListening);
+};
+
+/**
+ * 기존 템플릿 코드
+ */
+const setDefaultEnv = () => {
+  app.set("port", PORT);
+
+  server.listen(PORT);
+  server.on("error", onError);
+  server.on("listening", onListening);
+};
+
+if (ENV === "dev") {
+  setDevelopEnv();
+} else {
+  setDefaultEnv();
+}
