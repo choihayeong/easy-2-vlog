@@ -2,11 +2,22 @@
   "name": "easy_2_vlog",
   "version": "1.0.0",
   "private": true,
+  "description": "The best way to watch and edit vlogs.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/choihayeong/easy-2-vlog.git"
+  },
   "scripts": {
     "dev": "nodemon --env-file=.env.dev ./bin/www",
     "start": "nodemon ./bin/www",
     "prepare": "husky"
   },
+  "author": "hychoi<hychoi318@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/choihayeong/easy-2-vlog/issues"
+  },
+  "homepage": "https://github.com/choihayeong/easy-2-vlog#readme",
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.19.2",

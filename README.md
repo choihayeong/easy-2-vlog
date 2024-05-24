@@ -1,6 +1,6 @@
 # easy_2_vlog
 
-> easy to watch and edit vlog app by using node.js, express, mariaDB, ejs(template)
+> making easy to watch and edit vlog app by using node.js, express, mariaDB and ejs(template)
 
 ### package.json
 ```json
@@ -214,3 +214,9 @@ app.use("/videos", videosRouter);
 
 module.exports = app;
 ```
+
+#### References
+
+- [Node.js | 초간단 API 서버 만들기](https://kitty-geno.tistory.com/62?category=960541)
+
+- [express.js, node.js + MariaDB](https://velog.io/@ryutaegi/express.js-node.js-MariaDB)
