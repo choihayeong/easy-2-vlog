@@ -215,8 +215,30 @@ app.use("/videos", videosRouter);
 module.exports = app;
 ```
 
+### CREATE DATABASE & TABLE
+
+- Heidi SQL에서 쿼리문을 다음과 같이 실행(`Ctrl` + `F9`)
+
+```sql
+CREATE DATABASE easy_2_vlog;
+
+USE easy_2_vlog;
+
+CREATE TABLE videos (
+	idx INT AUTO_INCREMENT PRIMARY KEY,
+	vlog_title VARCHAR(100) NOT NULL,
+	vlog_desc TEXT NULL,
+	published_date TIMESTAMP NOT NULL,
+	hashtags TEXT NULL,
+	views INT DEFAULT 0,
+	ratings INT DEFAULT 0
+);
+```
+
 #### References
 
 - [Node.js | 초간단 API 서버 만들기](https://kitty-geno.tistory.com/62?category=960541)
 
 - [express.js, node.js + MariaDB](https://velog.io/@ryutaegi/express.js-node.js-MariaDB)
+
+- [Nodejs-MySQL](https://bitkunst.tistory.com/category/MySQL)
