@@ -2,6 +2,14 @@
 <html lang="en">
   <%- include('include/inc_head.html'); %>
   <body>
-    <div class="wrap">index page sss ssaaasssss<%=title%> sadssssfd</div>
+    <div class="wrap">
+      <h2>Welcome :) You can see trending videos 🎬</h2>
+
+      <% videos.forEach(item => { %>
+        <%- include("partials/partials_video.html", {video: item}) %>
+      <% }) %>
+
+      <%- include('include/inc_footer.html') %>
+    </div>
   </body>
 </html>

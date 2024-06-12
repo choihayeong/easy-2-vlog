@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <%- include('include/inc_head.html'); %>
+  <body>
+    <div class="wrap">
+        <h3>You're watching... <%=video.title%></h3>
+
+        <small>
+            <%= video.views %>
+            <%= video.views === 1 ? "view" : "views" %>
+        </small>
+
+        <hr />
+
+        <a href="<%= `/videos/edit/${id}` %>">Edit Video &rarr;</a>
+
+        <%- include('include/inc_footer.html') %>
+    </div>
+  </body>
+</html>

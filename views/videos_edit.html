@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <%- include('include/inc_head.html'); %>
+  <body>
+    <div class="wrap">
+        <h3>Edit: <%=title%></h3>
+
+        <form method="POST">
+            <fieldset>
+                <legend>Edit Video</legend>
+
+                <input type="text" name="vlog_title" placeholder="Edit Video Title" value="<%= video.title %>" required />
+            </fieldset>
+
+            <input type="submit" value="Save" />
+        </form>
+
+        <%- include('include/inc_footer.html') %>
+    </div>
+  </body>
+</html>
