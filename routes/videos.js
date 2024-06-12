@@ -28,13 +28,10 @@ const videos = [
   },
 ];
 
-/* GET videos listing. */
-router.get("/list", function (req, res, next) {
-  res.send("Videos list Page");
-});
-
-/* GET a video details */
-router.get("/:id(\\d+)", function (req, res, next) {
+/**
+ * Controllers
+ */
+const getVideo = (req, res, next) => {
   const {id} = req.params;
   const video = videos[id];
 
@@ -43,10 +40,9 @@ router.get("/:id(\\d+)", function (req, res, next) {
     id,
     video
   });
-});
+};
 
-/* GET a video edit page */
-router.get("/edit/:id(\\d+)", function (req, res, next) {
+const getEditVideo = (req, res, next) => {
   const {id} = req.params;
   const video = videos[id];
 
@@ -55,16 +51,26 @@ router.get("/edit/:id(\\d+)", function (req, res, next) {
     id,
     video
   });
-});
+};
 
-router.post("/edit/:id(\\d+)", function (req, res, next) {
+const postEditVideo = (req, res, next) => {
   const {id} = req.params;
-
   const {vlog_title} = req.body;
 
   videos[id].vlog_title = vlog_title;
 
   return res.redirect(`/videos/${id}`);
+}
+
+/* GET videos listing. */
+router.get("/list", function (req, res, next) {
+  res.send("Videos list Page");
 });
+
+/* GET a video details */
+router.get("/:id(\\d+)", getVideo);
+
+/* GET a video edit page */
+router.route("/edit/:id(\\d+)").get(getEditVideo).post(postEditVideo);
 
 module.exports = router;
