@@ -1,3 +1,4 @@
+const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 
@@ -28,9 +29,26 @@ const videos = [
   },
 ];
 
-/* GET home page. */
-router.get("/", (req, res, next) => {
+
+const FETCH_DEPARTMENT = async () => {
+  await axios
+    .get(`${process.env.BASE_URL}/api/department`)
+    .then((response) => {
+      // console.log(response);
+      const { data } = response;
+      // console.log(data);
+
+      return data;
+    })
+    .catch((error) => console.log(error));
+}
+
+const setHome = async(req, res, next) => {
+  FETCH_DEPARTMENT();
   res.render("index.html", { title: "Home", videos });
-});
+}
+
+/* GET home page. */
+router.get("/", setHome);
 
 module.exports = router;
