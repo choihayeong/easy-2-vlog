@@ -21,7 +21,7 @@ const videos = [
     views: 9,
   },
   {
-    idx: 3, 
+    idx: 2, 
     title: "That's just a video :P",
     description: "It's just a video :P",
     published_date: new Date(),
@@ -29,23 +29,17 @@ const videos = [
   },
 ];
 
-
-const FETCH_DEPARTMENT = async () => {
-  await axios
+const setHome = async(req, res, next) => {
+  const temp = await axios
     .get(`${process.env.BASE_URL}/api/department`)
     .then((response) => {
-      // console.log(response);
       const { data } = response;
-      // console.log(data);
 
       return data;
     })
     .catch((error) => console.log(error));
-}
 
-const setHome = async(req, res, next) => {
-  FETCH_DEPARTMENT();
-  res.render("index.html", { title: "Home", videos });
+  res.render("index.html", { title: "Home", videos, temp });
 }
 
 /* GET home page. */

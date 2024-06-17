@@ -16,6 +16,17 @@ router.get("/department", (req, res) => {
   });
 });
 
+router.get("/videos", (req, res) => {
+  maria.query("SELECT * FROM VIDEOS", (err, rows, fields) => {
+    if (!err) {
+      res.send(rows); // responses send rows
+    } else {
+      console.log("err: " + err);
+      res.send(err); // responses send err
+    }
+  });
+});
+
 /**
  * INSERT (CREATE)
  */
@@ -30,6 +41,24 @@ router.get("/insert", (req, res) => {
         res.send(err); // responses send err
       }
     },
+  );
+});
+router.post('/videos',(req, res) => {
+	const video = [
+		null,
+		req.body.vlog_title,
+		req.body.vlog_desc,
+		new Date(Date.now()),
+		req.body.hashtags,
+	];
+
+  console.log(video);
+
+  maria.query(
+    "INSERT INTO VIDEOS(VLOG_TITLE, VLOG_DESC, PUBLISHED_DATE, HASHTAGS) VALUES (?)", video, function(err, result) {
+      if (err) res.status(500);
+      res.send(result);
+    }
   );
 });
 

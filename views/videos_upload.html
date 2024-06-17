@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <%- include('include/inc_head.html'); %>
+  <body>
+    <div class="wrap">
+        <h3>Upload Video</h3>
+
+        <form method="POST" id="uploadForm">
+            <fieldset>
+                <legend>Upload Video</legend>
+
+                <div>
+                    <label for="">
+                        video title : 
+                        <input type="text" name="vlog_title" maxlength="80" placeholder="Video Title" required />
+                    </label>
+                </div>
+                
+                <div>
+                    <label for="">
+                        video description : 
+                        <input type="text" name="vlog_desc" minlength="30" placeholder="Video Description" required />
+                    </label>
+                </div>
+
+                <div>
+                    Hashtags : 
+                    <label for="">
+                        <input type="text" name="hashtags" placeholder="Hashtags, seperated by comma." />
+                    </label>
+                </div>                
+            </fieldset>
+
+            <input type="submit" value="Upload" id="btnUpload" />
+        </form>
+
+        <%- include('include/inc_footer.html') %>
+    </div>
+  </body>
+</html>
