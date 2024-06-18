@@ -235,6 +235,13 @@ CREATE TABLE videos (
 );
 ```
 
+### INSERT DATA WITH AUTO_INCREMENT COLUMN
+
+> Note: To be able to get the inserted id, only one row can be inserted.
+
+- [W3C SCHOOLS 참고](https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp)
+
+
 #### References
 
 - [Node.js | 초간단 API 서버 만들기](https://kitty-geno.tistory.com/62?category=960541)
