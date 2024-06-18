@@ -45,18 +45,17 @@ router.get("/insert", (req, res) => {
 });
 router.post('/videos',(req, res) => {
 	const video = [
-		null,
 		req.body.vlog_title,
 		req.body.vlog_desc,
-		new Date(Date.now()),
+		new Date(Date.now()).toDateString(),
 		req.body.hashtags,
 	];
 
-  console.log(video);
-
   maria.query(
-    "INSERT INTO VIDEOS(VLOG_TITLE, VLOG_DESC, PUBLISHED_DATE, HASHTAGS) VALUES (?)", video, function(err, result) {
+    `INSERT INTO videos (vlog_title, vlog_desc, published_date, hashtags) VALUES (?)`, [video] , (err, result) => {
       if (err) res.status(500);
+      console.log("result", result);
+      console.log("err", err);
       res.send(result);
     }
   );

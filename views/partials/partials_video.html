@@ -1,16 +1,19 @@
 <div class="video-info">
     <h4 class="video-info__title">
-        <a href="<%=`/videos/${video.idx}`%>"><%=video.title%></a>
+        <a href="<%=`/videos/${video.idx}`%>"><%=video.vlog_title%></a>
     </h4>
     <ul class="video-info__details">
         <li>
-            description: <%=video.description%>
+            description: <%=video.vlog_desc%>
         </li>
         <li>
             published date: <%=video.published_date%>
         </li>
         <li>
             view(s): <%=video.views%>
+        </li>
+        <li>
+            ratings: <%=video.ratings%>
         </li>
     </ul>
 </div>

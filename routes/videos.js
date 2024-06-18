@@ -8,21 +8,21 @@ const router = express.Router();
 const videos = [
   {
     idx: 0,
-    title: "First v-log",
+    vlog_title: "First v-log",
     description: "It's the first vlog",
     published_date: new Date(),
     views: 999,
   },
   {
     idx: 1, 
-    title: "Second video",
+    vlog_title: "Second video",
     description: "It's the second video",
     published_date: new Date(),
     views: 9,
   },
   {
     idx: 2, 
-    title: "That's just a video :P",
+    vlog_title: "That's just a video :P",
     description: "It's just a video :P",
     published_date: new Date(),
     views: 1,
@@ -48,12 +48,9 @@ const getUploadVideo = (req, res, next) => {
 };
 
 const postUploadVideo = async (req, res, next) => {
-  const {vlog_title, vlog_desc, hashtags} = req.body;
-
   try {
     await axios.post(`${process.env.BASE_URL}/api/videos`, req.body).then((response) => {
-      console.log(req.body);
-      console.log(response.data);
+      return res.redirect("/");
     })
   } catch (err) {
     return res.status(400).render("videos_upload.html", {
@@ -81,6 +78,7 @@ const postEditVideo = async(req, res, next) => {
 
   return res.redirect(`/videos/${id}`);
 };
+
 
 /**
  * GET videos listing.
