@@ -3,13 +3,36 @@
   <%- include('include/inc_head.html'); %>
   <body>
     <div class="wrap">
-        <h3>Edit: <%=title%></h3>
+        <h3>Edit: <%=video.vlog_title%></h3>
 
         <form method="POST" id="editForm">
             <fieldset>
                 <legend>Edit Video</legend>
 
-                <input type="text" name="vlog_title" placeholder="Edit Video Title" value="<%= video.title %>" required />
+                <div>
+                  <label for="">
+                    video title : 
+                    <input type="text" name="vlog_title" placeholder="Edit Video Title" value="<%= video.vlog_title %>" required />
+                  </label>
+                </div>
+
+                <div>
+                  <label for="">
+                      video description : 
+                      <input type="text" name="vlog_desc" minlength="30" placeholder="Video Description" value="<%= video.vlog_desc %>" required />
+                  </label>
+                </div>
+
+                <input type="hidden" name="published_date" value="<%= video.published_date %>" />
+
+                <div>
+                  Hashtags : 
+                  <label for="">
+                      <input type="text" name="hashtags" placeholder="Hashtags, seperated by comma." value="<%= video.hashtags %>" />
+                  </label>
+                </div>
+
+                <input type="hidden" name="idx" value="<%= video.idx %>" />
             </fieldset>
 
             <input type="submit" value="Save" id="btnSave" />

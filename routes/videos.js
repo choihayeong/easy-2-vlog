@@ -1,44 +1,25 @@
 const axios = require("axios");
 const express = require("express");
+const { response } = require("../app");
 const router = express.Router();
-
-/**
- * Dummy video data
- */
-const videos = [
-  {
-    idx: 0,
-    vlog_title: "First v-log",
-    description: "It's the first vlog",
-    published_date: new Date(),
-    views: 999,
-  },
-  {
-    idx: 1, 
-    vlog_title: "Second video",
-    description: "It's the second video",
-    published_date: new Date(),
-    views: 9,
-  },
-  {
-    idx: 2, 
-    vlog_title: "That's just a video :P",
-    description: "It's just a video :P",
-    published_date: new Date(),
-    views: 1,
-  },
-];
 
 /**
  * Controllers
  */
-const getVideo = (req, res, next) => {
-  const {id} = req.params;
-  const video = videos[id];
+const getVideo = async (req, res, next) => {
+  const { id } = req.params;
+
+  const video = await axios
+    .get(`${process.env.BASE_URL}/api/videos/${id}`)
+    .then((response) => {
+      const { data } = response;
+
+      return data;
+    })
+    .catch((error) => console.log(error));
+
 
   return res.render("videos_view.html", {
-    title: `${video.title}`,
-    id,
     video
   });
 };
@@ -59,26 +40,45 @@ const postUploadVideo = async (req, res, next) => {
   }
 };
 
-const getEditVideo = (req, res, next) => {
+const getEditVideo = async (req, res, next) => {
   const {id} = req.params;
-  const video = videos[id];
+  const video = await axios
+    .get(`${process.env.BASE_URL}/api/videos/${id}`)
+    .then((response) => {
+      const { data } = response;
+
+      return data;
+    })
+    .catch((error) => console.log(error));
 
   return res.render("videos_edit.html", {
-    title: `${video.title}`,
-    id,
     video
   });
 };
 
 const postEditVideo = async(req, res, next) => {
   const {id} = req.params;
-  const {vlog_title, vlog_desc, published_date, hashtags} = req.body;
 
-  videos[id].vlog_title = vlog_title;
+  const video = await axios
+    .get(`${process.env.BASE_URL}/api/videos/${id}`)
+    .then((response) => {
+      const { data } = response;
 
-  return res.redirect(`/videos/${id}`);
+      return data;
+    })
+    .catch((error) => console.log(error));
+
+  try {
+    await axios.put(`${process.env.BASE_URL}/api/videos`, req.body).then((response) => {
+      return res.redirect(`/videos/${id}`);
+    })
+  } catch (err) {
+    return res.status(400).render("videos_edit.html", {
+      video,
+      errMessage: err._message,
+    });
+  }
 };
-
 
 /**
  * GET videos listing.

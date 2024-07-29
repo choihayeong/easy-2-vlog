@@ -61,6 +61,43 @@ router.post('/videos',(req, res) => {
   );
 });
 
+
+/**
+ * VIEW (READ)
+ */
+router.get("/videos/:idx", (req,res) => {
+  const idx = req.params.idx;
+  maria.query("SELECT * FROM videos WHERE idx=?", idx, (err, result) => {
+    if (err) res.status(500);
+    // console.log(`video number ${idx}`);
+    res.send(result[0]);
+  });
+});
+
+/**
+ * UPDATE
+ */
+router.put("/videos", (req,res)=> {
+  const idx = req.body.idx;
+  const video = [
+		req.body.vlog_title,
+		req.body.vlog_desc,
+		req.body.published_date,
+		req.body.hashtags,
+	];
+
+  console.log(req.body.idx, typeof idx);
+
+  maria.query(
+    `UPDATE videos SET vlog_title=?, vlog_desc=?, published_date=?, hashtags=? WHERE idx='${idx}'` , video, (err, result) => {
+      if (err) res.status(500);
+      console.log("result", result);
+      console.log("err", err);
+      res.send(result);
+    }
+  );
+});
+
 /**
  * ❗ danger
  */
