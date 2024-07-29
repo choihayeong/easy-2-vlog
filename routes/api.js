@@ -86,8 +86,6 @@ router.put("/videos", (req,res)=> {
 		req.body.hashtags,
 	];
 
-  console.log(req.body.idx, typeof idx);
-
   maria.query(
     `UPDATE videos SET vlog_title=?, vlog_desc=?, published_date=?, hashtags=? WHERE idx='${idx}'` , video, (err, result) => {
       if (err) res.status(500);
@@ -96,6 +94,18 @@ router.put("/videos", (req,res)=> {
       res.send(result);
     }
   );
+});
+
+/**
+ * DELETE
+ */
+router.delete("/videos/:idx", (req, res) => {
+  const idx = req.params.idx;
+
+  maria.query(`DELETE FROM videos WHERE idx='${idx}'`, idx, (err, result) => {
+    if (err) res.status(500);
+    res.send(result);
+  });
 });
 
 /**

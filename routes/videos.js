@@ -80,6 +80,23 @@ const postEditVideo = async(req, res, next) => {
   }
 };
 
+const deleteVideo = async(req, res, next) => {
+  const {id} = req.params;
+
+  await axios.delete(`${process.env.BASE_URL}/api/videos/${id}`).then(response => {
+    if (response.data.affectedRows == 1) {
+      // alert("삭제 완료");
+      return res.redirect("/");
+    } else {
+      // alert("오류가 발생했습니다.");
+    }
+  });
+
+  // if (confirm("삭제하시겠습니까?")) {
+  //   // 
+  // }
+};
+
 /**
  * GET videos listing.
  */
@@ -101,5 +118,10 @@ router.get("/:id(\\d+)", getVideo);
  * GET a video edit page
  */
 router.route("/edit/:id(\\d+)").get(getEditVideo).post(postEditVideo);
+
+/**
+ * DELETE a video 
+ */
+router.get("/delete/:id(\\d+)", deleteVideo);
 
 module.exports = router;
