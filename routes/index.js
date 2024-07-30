@@ -13,9 +13,14 @@ const setHome = async(req, res, next) => {
     .catch((error) => console.log(error));
 
   res.render("index.html", { title: "Home", videos });
-}
+};
+
+const setSearch = async(req, res, next) => {
+  return res.render("search.html");
+};
 
 /* GET home page. */
 router.get("/", setHome);
+router.get("/search", setSearch);
 
 module.exports = router;
